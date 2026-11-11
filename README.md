@@ -8,6 +8,8 @@
         - `tracemalloc` v
         - `psutil`
         - `profiler`
+    - 패턴 생성하는 파트부터? -> 유저 인풋에서 재활용
+        - size, cross/x
 4. 오차범위 판정
 ```
 # A == 대상, B == 필터
