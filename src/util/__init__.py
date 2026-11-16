@@ -9,3 +9,11 @@ from .testing_function.testing_function import testing_function, quick_test
 
 # 인자를 묶어주는 클래스
 from .testing_function.test_spec import TestSpec
+
+# 저장/로드용 테스팅 로그 클래스
+from .testing_function.test_log import TestLog
+
+# =====================================
+# input
+from check_int_user_input import check_int_user_input
+from choice import choice
