@@ -7,5 +7,5 @@ from .testing_function.testable import testable
 # 빠른 테스트 -> quick_test
 from .testing_function.testing_function import testing_function, quick_test
 
-# 인자를 묶어주는 함수
+# 인자를 묶어주는 클래스
 from .testing_function.test_spec import TestSpec
