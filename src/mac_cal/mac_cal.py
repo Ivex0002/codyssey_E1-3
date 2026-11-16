@@ -51,8 +51,12 @@ class MacCal:
 
                 match user_input:
                     case 1:
+                        # todo : size, shape 입력받기
+                        # size, shape 에 따른 필터/패턴 생성 로직
                         return
                     case 2:
+                        # 불러온 data.json 분석
+                        # 단순 dict 타입이기 때문에 직접 다 까봐야 함
                         return
                     case 3:
                         self.exit()
