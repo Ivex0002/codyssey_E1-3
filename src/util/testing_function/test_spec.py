@@ -19,6 +19,8 @@ class LazyTestTarget:
 
 @dataclass
 class TestSpec:
+    """테스팅 함수용 인자를 묶어주는 클래스"""
+
     test_target: LazyTestTarget
     test_count: int
     name: str | None = None

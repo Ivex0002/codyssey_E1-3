@@ -12,6 +12,8 @@ class SingleTest:
 
 @dataclass
 class TestLog:
+    """저장/로드용 테스팅 로그 클래스"""
+
     start_time: str
     end_time: str
     name: str
