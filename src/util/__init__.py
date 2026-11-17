@@ -14,7 +14,7 @@ from .testing_function.test_log import TestLog
 # input
 from .input.check_int_user_input import check_int_user_input
 from .input.choice import choice
-from .input import user_input_pattern
+from .input.user_input_pattern import user_input_pattern
 
 # =====================================
 # pattern

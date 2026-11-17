@@ -1,5 +1,6 @@
 from .check_int_user_input import check_int_user_input
 from util import choice, validate_pattern
+from src.data_class.pattern import Pattern, PatternShape
 
 _wrong_input_msg = "잘못된 응답입니다. 다시 입력해주세요\n"
 
@@ -24,11 +25,11 @@ def user_input_pattern():
         validate_pattern.size,
     )
 
-    menu = ["x", "+"]
+    menu: list[PatternShape] = ["x", "+"]
     shape = _get_valid_input(
         "형태 : 둘 중 하나의 형태를 골라주세요",
         lambda: menu[choice(menu) - 1],
         validate_pattern.shape,
     )
 
-    return size, shape
+    return Pattern(size, shape)

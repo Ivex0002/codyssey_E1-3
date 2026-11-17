@@ -2,11 +2,13 @@ from dataclasses import dataclass
 from typing import Literal
 from util import pattern_generator, validate_pattern
 
+PatternShape = Literal["x", "+"]
+
 
 @dataclass
 class Pattern:
     size: int
-    shape: Literal["x", "+"]
+    shape: PatternShape
 
     def __post_init__(self):
         if not validate_pattern.size(self.size):
