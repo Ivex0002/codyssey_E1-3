@@ -1,4 +1,5 @@
 from .check_int_user_input import check_int_user_input
+from util import choice
 
 
 # todo
@@ -9,11 +10,15 @@ def user_input_pattern():
         size = check_int_user_input(99)
 
         if size < 3 or size % 2 == 0:
+            print("잘못된 응답입니다. 다시 입력해주세요\n")
             continue
 
-    while True:
-        shape = input("x 혹은 y를 입력해주세요\n선택 : ").strip()
-        if shape not in ["x", "+"]:
-            continue
+        else:
+            break
 
-    return {}
+    print("형태 : 둘 중 하나의 형태를 골라주세요")
+    menu = ["x", "+"]
+    shape_input = choice(menu)
+    shape = menu[shape_input - 1]
+
+    return {size, shape}
