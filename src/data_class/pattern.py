@@ -10,4 +10,5 @@ class Pattern:
 
     @property
     def show():
+        # 123
         return pattern_generator()
