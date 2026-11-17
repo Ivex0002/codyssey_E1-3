@@ -1,12 +1,14 @@
 from typing import Literal
+from util import validate_pattern
 
 
 def pattern_generator(size: int, shape: Literal["x", "+"]):
     """2차원 배열 x or + 생성 함수"""
 
-    if size < 3 or size % 2 == 0 or shape not in ["x", "+"]:
-        print("size는 1 이상의 홀수여야 하며, shape는 'x' 또는 '+'여야 합니다.")
-        return
+    if not validate_pattern.size(size) or not validate_pattern.shape(shape):
+        raise ValueError(
+            "size는 3 이상의 홀수여야 하며, shape는 'x' 또는 '+'여야 합니다."
+        )
 
     mid = size // 2
     cond = {

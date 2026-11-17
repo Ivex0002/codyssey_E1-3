@@ -17,5 +17,6 @@ from .input.choice import choice
 from .input import user_input_pattern
 
 # =====================================
-# pattern_generator
-from .pattern_generator import pattern_generator
+# pattern
+from .pattern.pattern_generator import pattern_generator
+from .pattern.validate_pattern import validate_pattern
