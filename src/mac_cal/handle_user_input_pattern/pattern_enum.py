@@ -1,9 +1,10 @@
 from enum import Enum
 from typing import Literal, TypeAlias
+from data_class.type import PatternMatrix
 
 PatternKey: TypeAlias = Literal["filter_a", "filter_b", "pattern"]
 
-PatternInputData: TypeAlias = dict[PatternKey, list[list[float]]]
+PatternInputData: TypeAlias = dict[PatternKey, PatternMatrix]
 
 
 class PatternEnum(Enum):

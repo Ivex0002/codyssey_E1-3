@@ -1,5 +1,5 @@
 from util import user_input_custom_pattern
-from .pattern_enum import PatternEnum, PatternKey, PatternInputData
+from .pattern_enum import PatternEnum, PatternInputData
 
 
 def custom_input() -> PatternInputData:

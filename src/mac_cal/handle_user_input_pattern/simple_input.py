@@ -1,5 +1,5 @@
 from util import user_input_simple_pattern
-from .pattern_enum import PatternEnum, PatternKey, PatternInputData
+from .pattern_enum import PatternEnum, PatternInputData
 
 
 # 리턴 타입 체킹

@@ -1,6 +1,9 @@
-def user_input_custom_pattern():
+from data_class.type import PatternMatrix
 
-    user_input: list[list[float]] = []
+
+def user_input_custom_pattern() -> PatternMatrix:
+
+    user_input: PatternMatrix = []
 
     for _ in range(3):
         row = list(map(float, input().split()))
