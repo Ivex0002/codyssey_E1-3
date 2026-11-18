@@ -1,6 +1,6 @@
 from .check_int_user_input import check_int_user_input
 from util import choice, validate_pattern
-from src.data_class.pattern import Pattern, PatternShape
+from data_class.simple_pattern import SimplePattern, PatternShape
 
 _wrong_input_msg = "잘못된 응답입니다. 다시 입력해주세요\n"
 
@@ -16,7 +16,7 @@ def _get_valid_input(prompt, input_func, validator):
         print(_wrong_input_msg)
 
 
-def user_input_pattern():
+def user_input_simple_pattern():
     """size, shape를 입력받아 리턴해주는 함수"""
 
     size = _get_valid_input(
@@ -32,4 +32,4 @@ def user_input_pattern():
         validate_pattern.shape,
     )
 
-    return Pattern(size, shape)
+    return SimplePattern(size, shape)

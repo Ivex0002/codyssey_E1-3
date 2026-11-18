@@ -6,7 +6,7 @@ PatternShape = Literal["x", "+"]
 
 
 @dataclass
-class Pattern:
+class SimplePattern:
     size: int
     shape: PatternShape
 

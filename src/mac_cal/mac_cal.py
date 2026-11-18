@@ -1,6 +1,8 @@
-from util import choice, TestLog, user_input_pattern
-from data_class.pattern import Pattern
+from util import choice, TestLog
+from data_class.simple_pattern import SimplePattern
 import json
+from .handle_user_input_pattern.custom_input import custom_input
+from .handle_user_input_pattern.simple_input import simple_input
 
 path = {
     "data_json_path": r"data/data.json",
@@ -13,7 +15,7 @@ class MacCal:
         self.test_logs: list[TestLog] = []
         self.data_json: dict | None = None
         # 유저 입력 패턴이 장기저장 필요한가?
-        self.patterns: list[Pattern]
+        self.patterns: list[SimplePattern]
 
         self.load()
 
@@ -43,19 +45,15 @@ class MacCal:
     def exit(self):
         print("프로그램을 종료합니다.")
 
-    # 패턴/필터 나누나? 여러개 받아야하나? 장기 저장 필요한가? 패턴 대상의 가중치도 필요한가?
     def input_pattern(self):
-        pattern = user_input_pattern()
-        try:
-            self.patterns.append(pattern)
-            print("패턴이 저장되었습니다.")
-        except:
-            print("패턴 저장에 실패했습니다.")
-        # todo
-        # pattern.show()
+        menu = ["3x3", "패턴 생성기(보너스)"]
+        chosen_menu = menu[choice(menu) - 1]
+
+        user_input = custom_input() if chosen_menu == 1 else simple_input()
+        # todo filter, pattern 연산
 
     def run(self):
-        menu = ["사용자 입력 패턴/필터", "data.json 분석", "종료"]
+        menu = ["사용자 입력", "data.json 분석", "종료"]
         try:
             while True:
                 print("===Mini NPU Simulator===")
