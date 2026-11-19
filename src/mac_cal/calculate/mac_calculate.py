@@ -27,12 +27,15 @@ def mac_calculate(
     score_a = 0.0
     score_b = 0.0
 
+    operation_count = 0
+
     for y, row in enumerate(pattern):
         for x, value in enumerate(row):
             score_a += filter_a[y][x] * value
             score_b += filter_b[y][x] * value
+            operation_count += 1
 
-    return score_a, score_b
+    return score_a, score_b, operation_count
 
 
 def validate_matrix_len(matrices: list[PatternMatrix]):

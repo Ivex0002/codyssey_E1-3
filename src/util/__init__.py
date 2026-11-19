@@ -26,3 +26,7 @@ from .pattern.validate_pattern import validate_pattern
 # print in terminal
 from .print.print_pattern import print_pattern
 from .print.print_result import print_result
+
+# =====================================
+# validate
+from .validate.validate_score import validate_score

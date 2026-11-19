@@ -15,14 +15,11 @@
 # B 점수: 0.8999999999999999
 # 판정: 판정 불가 (|A-B| < 1e-9)
 
-from util import TestLog
+from util import TestLog, validate_score
 
 
 def print_result(score_a: float, score_b: float, result_log: TestLog):
-    can_cal = abs(score_a - score_b) >= 1e-9
-
-    sum_test_time = sum((test.end_time - test.start_time) for test in result_log.tests)
-    cal_time = sum_test_time / len(result_log.tests) / 1_000_000
+    can_cal, cal_time = validate_score(score_a, score_b, result_log)
 
     print(line)
     print(result_msg + "" if can_cal else cant_cal_msg)

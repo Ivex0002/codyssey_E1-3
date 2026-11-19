@@ -4,6 +4,7 @@ import json
 from .handle_user_input_pattern.custom_input import custom_input
 from .handle_user_input_pattern.simple_input import simple_input
 from .calculate.mac_calculate import mac_calculate
+from .calculate.data_json_cal import data_json_cal
 
 path = {
     "data_json_path": r"data/data.json",
@@ -61,13 +62,17 @@ class MacCal:
         )
 
         # 1회 실행 결과를 저장
-        score_a, score_b = cal_result()
+        score_a, score_b, _count = cal_result()
 
         # 10회 연산 평균을 로그로 저장
-        # 기능 요구사항에는 없었으나, 테스트 1회의 연산 시간 및 전체 테스트 연산 시간 추적 가능
+        # 기능 요구사항에는 없었으나, 테스트 1회의 연산 시간 및 전체 테스트 연산 시간 따로 추적 가능
         result_log = quick_test(cal_result, test_count=10)
 
         print_result(score_a, score_b, result_log)
+
+    def handle_data_json(self):
+        data_json_cal(self.data_json)
+        return
 
     def run(self):
         menu = ["사용자 입력", "data.json 분석", "종료"]
@@ -80,13 +85,12 @@ class MacCal:
 
                 match user_input:
                     case 1:
-                        # todo : size, shape 입력받기
-                        # size, shape 에 따른 필터/패턴 생성 로직
                         self.input_pattern()
                         return
                     case 2:
                         # 불러온 data.json 분석
                         # 단순 dict 타입이기 때문에 직접 다 까봐야 함
+                        self.handle_data_json()
                         return
                     case 3:
                         self.exit()
