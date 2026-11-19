@@ -21,3 +21,8 @@ from .input.user_input_custom_pattern import user_input_custom_pattern
 # pattern
 from .pattern.pattern_generator import pattern_generator
 from .pattern.validate_pattern import validate_pattern
+
+# =====================================
+# print in terminal
+from .print.print_pattern import print_pattern
+from .print.print_result import print_result

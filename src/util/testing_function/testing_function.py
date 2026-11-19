@@ -1,10 +1,14 @@
-from datetime import datetime
+# from datetime import datetime
+from time import perf_counter_ns
 from .test_log import TestLog, SingleTest
 from .test_spec import TestSpec, LazyTestTarget
+from typing import TypeVar
+
+R = TypeVar("R")
 
 
-def _now() -> str:
-    return datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
+def _now() -> int:
+    return perf_counter_ns()
 
 
 def testing_function(spec: TestSpec) -> TestLog:
@@ -25,7 +29,7 @@ def testing_function(spec: TestSpec) -> TestLog:
 
 
 def quick_test(
-    target: LazyTestTarget, test_count: int, name: str | None = None
+    target: LazyTestTarget[R], test_count: int, name: str | None = None
 ) -> TestLog:
     """편의용 함수
 

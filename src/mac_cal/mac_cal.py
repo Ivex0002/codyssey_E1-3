@@ -1,8 +1,9 @@
-from util import choice, TestLog
+from util import choice, TestLog, print_pattern, quick_test, print_result
 from data_class.simple_pattern import SimplePattern
 import json
 from .handle_user_input_pattern.custom_input import custom_input
 from .handle_user_input_pattern.simple_input import simple_input
+from .calculate.mac_calculate import mac_calculate
 
 path = {
     "data_json_path": r"data/data.json",
@@ -50,7 +51,23 @@ class MacCal:
         chosen_menu = menu[choice(menu) - 1]
 
         user_input = custom_input() if chosen_menu == 1 else simple_input()
-        # todo filter, pattern 연산
+
+        for key, val in user_input.items():
+            print_pattern(key, val)
+        print("입력된 값은 위와 같습니다\nMAC 연산을 실행합니다")
+
+        cal_result = mac_calculate(
+            user_input["filter_a"], user_input["filter_b"], user_input["pattern"]
+        )
+
+        # 1회 실행 결과를 저장
+        score_a, score_b = cal_result()
+
+        # 10회 연산 평균을 로그로 저장
+        # 기능 요구사항에는 없었으나, 테스트 1회의 연산 시간 및 전체 테스트 연산 시간 추적 가능
+        result_log = quick_test(cal_result, test_count=10)
+
+        print_result(score_a, score_b, result_log)
 
     def run(self):
         menu = ["사용자 입력", "data.json 분석", "종료"]

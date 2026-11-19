@@ -3,8 +3,8 @@ from dataclasses import dataclass, asdict
 
 @dataclass
 class SingleTest:
-    start_time: str
-    end_time: str
+    start_time: int
+    end_time: int
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -14,8 +14,8 @@ class SingleTest:
 class TestLog:
     """저장/로드용 테스팅 로그 클래스"""
 
-    start_time: str
-    end_time: str
+    start_time: int
+    end_time: int
     name: str
     tests: list[SingleTest]
 

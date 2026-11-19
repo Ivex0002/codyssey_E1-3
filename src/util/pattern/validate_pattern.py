@@ -9,3 +9,4 @@ class ValidatePattern:
 
 
 validate_pattern = ValidatePattern()
+"""해당 패턴의 크기가 3 이상 및 홀수 여부, 모양이 +, x인지 여부"""

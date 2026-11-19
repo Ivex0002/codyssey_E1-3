@@ -14,16 +14,29 @@
 # B 점수: 0.8999999999999999
 # 판정: 판정 불가 (|A-B| < 1e-9)
 from data_class.type import PatternMatrix
+from util import testable
 
 
+@testable
 def mac_calculate(
     filter_a: PatternMatrix, filter_b: PatternMatrix, pattern: PatternMatrix
 ):
 
-    return
+    validate_matrix_len([filter_a, filter_b, pattern])
+
+    score_a = 0.0
+    score_b = 0.0
+
+    for y, row in enumerate(pattern):
+        for x, value in enumerate(row):
+            score_a += filter_a[y][x] * value
+            score_b += filter_b[y][x] * value
+
+    return score_a, score_b
 
 
 def validate_matrix_len(matrices: list[PatternMatrix]):
+    """하나라도 행 길이 다르면 오류"""
     sizes = set()
     for idx, mat in enumerate(matrices):
         width = len(mat[0])

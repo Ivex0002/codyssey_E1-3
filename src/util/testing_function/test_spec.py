@@ -1,9 +1,13 @@
 from collections.abc import Callable
 from dataclasses import dataclass
+from typing import Generic, ParamSpec, TypeVar
+
+P = ParamSpec("P")
+R = TypeVar("R")
 
 
-class LazyTestTarget:
-    def __init__(self, func: Callable, args: tuple, kwargs: dict):
+class LazyTestTarget(Generic[R]):
+    def __init__(self, func: Callable[..., R], args: tuple, kwargs: dict):
         self.func = func
         self.args = args
         self.kwargs = kwargs
@@ -13,15 +17,15 @@ class LazyTestTarget:
         kwargs_str = [f"{k}={repr(v)}" for k, v in kwargs.items()]
         self.call_signature = f"{func.__name__}({', '.join(args_str + kwargs_str)})"
 
-    def __call__(self):
+    def __call__(self) -> R:
         return self.func(*self.args, **self.kwargs)
 
 
 @dataclass
-class TestSpec:
+class TestSpec(Generic[R]):
     """테스팅 함수용 인자를 묶어주는 클래스"""
 
-    test_target: LazyTestTarget
+    test_target: LazyTestTarget[R]
     test_count: int
     name: str | None = None
 

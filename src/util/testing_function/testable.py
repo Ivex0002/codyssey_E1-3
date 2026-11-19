@@ -1,9 +1,13 @@
 from collections.abc import Callable
 from functools import wraps
+from typing import ParamSpec, TypeVar
 from .test_spec import LazyTestTarget
 
+P = ParamSpec("P")
+R = TypeVar("R")
 
-def testable(func: Callable) -> Callable:
+
+def testable(func: Callable[P, R]) -> Callable[P, LazyTestTarget[R]]:
     """하나의 함수를 지연실행으로 변환
 
     사용법::
@@ -21,7 +25,7 @@ def testable(func: Callable) -> Callable:
     """
 
     @wraps(func)
-    def wrapper(*args, **kwargs) -> LazyTestTarget:
+    def wrapper(*args: P.args, **kwargs: P.kwargs) -> LazyTestTarget[R]:
         return LazyTestTarget(func, args, kwargs)
 
     return wrapper
