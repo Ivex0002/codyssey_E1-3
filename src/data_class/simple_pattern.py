@@ -1,6 +1,9 @@
 from dataclasses import dataclass
 from typing import Literal
-from util import pattern_generator, validate_pattern
+
+# from util import pattern_generator, validate_pattern
+from util.pattern.pattern_generator import pattern_generator
+from util.validate.validate_pattern import validate_pattern
 
 PatternShape = Literal["x", "+"]
 

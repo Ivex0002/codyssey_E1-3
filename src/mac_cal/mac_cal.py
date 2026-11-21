@@ -17,13 +17,14 @@ class MacCal:
         self.test_logs: list[TestLog] = []
         self.data_json: dict | None = None
         # 유저 입력 패턴이 장기저장 필요한가?
-        self.patterns: list[SimplePattern]
+        # self.patterns: list[SimplePattern]
 
         self.load()
 
     def load(self):
         self.data_json = self.load_path(path["data_json_path"])
-        self.test_logs = self.load_path(path["test_logs_path"]) or []
+        # 테스트 로그 장기저장(미정)
+        # self.test_logs = self.load_path(path["test_logs_path"]) or []
 
     def load_path(self, path: str):
         try:
@@ -86,12 +87,12 @@ class MacCal:
                 match user_input:
                     case 1:
                         self.input_pattern()
-                        return
+                        continue
                     case 2:
                         # 불러온 data.json 분석
                         # 단순 dict 타입이기 때문에 직접 다 까봐야 함
                         self.handle_data_json()
-                        return
+                        continue
                     case 3:
                         self.exit()
                         break

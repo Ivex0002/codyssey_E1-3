@@ -15,7 +15,8 @@
 # B 점수: 0.8999999999999999
 # 판정: 판정 불가 (|A-B| < 1e-9)
 
-from util import TestLog, validate_score
+from ..testing_function.test_log import TestLog
+from ..validate.validate_score import validate_score
 
 
 def print_result(score_a: float, score_b: float, result_log: TestLog):

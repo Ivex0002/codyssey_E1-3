@@ -1,5 +1,5 @@
 from typing import Literal
-from util import validate_pattern
+from ..validate.validate_pattern import validate_pattern
 
 
 def pattern_generator(size: int, shape: Literal["x", "+"]):

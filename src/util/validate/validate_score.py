@@ -1,4 +1,4 @@
-from util import TestLog
+from ..testing_function.test_log import TestLog
 
 
 def validate_score(score_a: float, score_b: float, result_log: TestLog):

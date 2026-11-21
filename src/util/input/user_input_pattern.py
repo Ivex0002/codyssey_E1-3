@@ -1,5 +1,6 @@
 from .check_int_user_input import check_int_user_input
-from util import choice, validate_pattern
+from .choice import choice
+from ..validate.validate_pattern import validate_pattern
 from data_class.simple_pattern import SimplePattern, PatternShape
 
 _wrong_input_msg = "잘못된 응답입니다. 다시 입력해주세요\n"
