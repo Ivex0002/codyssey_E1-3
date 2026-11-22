@@ -22,6 +22,7 @@ from ..validate.validate_score import validate_score
 def print_result(score_a: float, score_b: float, result_log: TestLog):
     can_cal, cal_time = validate_score(score_a, score_b, result_log)
 
+    print()
     print(line)
     print(result_msg + "" if can_cal else cant_cal_msg)
     print(line)

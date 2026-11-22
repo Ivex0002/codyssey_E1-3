@@ -39,14 +39,20 @@ def mac_calculate(
 
 
 def validate_matrix_len(matrices: list[PatternMatrix]):
-    """하나라도 행 길이 다르면 오류"""
+    """세 행렬의 구조와 크기가 동일한지 검사"""
+
     sizes = set()
+
     for idx, mat in enumerate(matrices):
+        if not mat:
+            raise ValueError(f"idx:{idx} 행렬이 비어 있습니다.")
+
         width = len(mat[0])
+
         if any(len(row) != width for row in mat):
-            raise ValueError(f"idx:{idx} 의 행렬구조가 올바르지 않습니다.")
+            raise ValueError(f"idx:{idx} 행렬의 행 길이가 서로 다릅니다.")
+
         sizes.add((len(mat), width))
 
     if len(sizes) != 1:
-        raise ValueError("세 행렬의 크기가 서로 다릅니다.")
-    return
+        raise ValueError(f"세 행렬의 크기가 서로 다릅니다. " f"현재 크기: {sizes}")

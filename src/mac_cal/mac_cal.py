@@ -52,7 +52,9 @@ class MacCal:
         menu = ["3x3", "패턴 생성기(보너스)"]
         chosen_menu = menu[choice(menu) - 1]
 
-        user_input = custom_input() if chosen_menu == 1 else simple_input()
+        # print("debug:" + chosen_menu)
+
+        user_input = custom_input() if chosen_menu == menu[0] else simple_input()
 
         for key, val in user_input.items():
             print_pattern(key, val)
@@ -62,14 +64,18 @@ class MacCal:
             user_input["filter_a"], user_input["filter_b"], user_input["pattern"]
         )
 
-        # 1회 실행 결과를 저장
-        score_a, score_b, _count = cal_result()
+        try:
+            # 1회 실행 결과를 저장
+            score_a, score_b, _count = cal_result()
+            # 10회 연산 평균을 로그로 저장
+            # 기능 요구사항에는 없었으나, 테스트 1회의 연산 시간 및 전체 테스트 연산 시간 따로 추적 가능
+            result_log = quick_test(cal_result, test_count=10)
 
-        # 10회 연산 평균을 로그로 저장
-        # 기능 요구사항에는 없었으나, 테스트 1회의 연산 시간 및 전체 테스트 연산 시간 따로 추적 가능
-        result_log = quick_test(cal_result, test_count=10)
+            print_result(score_a, score_b, result_log)
 
-        print_result(score_a, score_b, result_log)
+        # 잘못된 인풋이 들어올 때 e) 세 배열의 크기가 다른 등의 경우
+        except ValueError as e:
+            print(f"MAC 연산 오류: {e}")
 
     def handle_data_json(self):
         data_json_cal(self.data_json)

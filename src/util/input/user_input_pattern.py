@@ -11,6 +11,9 @@ def _get_valid_input(prompt, input_func, validator):
         print(prompt)
         value = input_func()
 
+        # print(f"value: {value}")
+        # print(f"debug:{validator(value)}")
+
         if validator(value):
             return value
 

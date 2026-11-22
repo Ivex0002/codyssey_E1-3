@@ -53,28 +53,38 @@ def data_json_cal(data: dict | None):
         _small_label(size)
         found_filter = filters[_size_for_filter(size)]
         result = mac_calculate(found_filter["cross"], found_filter["x"], log["input"])
-        score_cross, score_x, operation_count = result()
-        _print_score(score_cross, score_x)
-        result_log = quick_test(result, test_count=10)
-        can_cal, cal_time = validate_score(score_cross, score_x, result_log)
+        try:
+            score_cross, score_x, operation_count = result()
+            _print_score(score_cross, score_x)
+            result_log = quick_test(result, test_count=10)
+            can_cal, cal_time = validate_score(score_cross, score_x, result_log)
 
-        if can_cal:
-            jud = "Cross" if score_cross > score_x else "X"
-            is_pass = jud.lower() == log["expected"].lower()
-            fail_rsn = None if is_pass else "기대 결과와 판정 결과 불일치"
-            _print_jud(jud, log["expected"])
-        else:
-            is_pass = False
-            fail_rsn = "동점(UNDECIDED) 처리 규칙에 따라 FAIL"
-            _print_jud(None, log["expected"])
+            if can_cal:
+                jud = "Cross" if score_cross > score_x else "X"
+                is_pass = jud.lower() == log["expected"].lower()
+                fail_rsn = None if is_pass else "기대 결과와 판정 결과 불일치"
+                _print_jud(jud, log["expected"])
+            else:
+                is_pass = False
+                fail_rsn = "동점(UNDECIDED) 처리 규칙에 따라 FAIL"
+                _print_jud(None, log["expected"])
 
-        # 저장
-        test_log_saves[size] = {
-            "avg": cal_time,
-            "cnt": operation_count,
-            "is_pass": is_pass,
-            "fail_rsn": fail_rsn,
-        }
+            # 저장
+            test_log_saves[size] = {
+                "avg": cal_time,
+                "cnt": operation_count,
+                "is_pass": is_pass,
+                "fail_rsn": fail_rsn,
+            }
+        # data.json에 서로 길이가 다른 패턴/필터가 입력될경우
+        except ValueError as e:
+            print(f"MAC 연산 오류: {e}")
+            test_log_saves[size] = {
+                "avg": 0.0,
+                "cnt": 0,
+                "is_pass": False,
+                "fail_rsn": str(e),
+            }
 
     _big_label("[3] 성능 분석 (평균/10회)")
     print(f"{'크기':<10}{'평균 시간(ms)':>12}{'연산 횟수':>12}")

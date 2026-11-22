@@ -1,11 +1,13 @@
 class ValidatePattern:
     @staticmethod
     def size(size: int) -> bool:
-        return size < 3 or size % 2 == 0
+        # print(f"debug: {size}")
+        return size >= 3 and size % 2 == 1
 
     @staticmethod
     def shape(shape: str) -> bool:
-        return shape not in ("x", "+")
+        # print(f"debug: {shape}")
+        return shape in ("x", "+")
 
 
 validate_pattern = ValidatePattern()
