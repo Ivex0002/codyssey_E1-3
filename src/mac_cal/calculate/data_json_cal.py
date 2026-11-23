@@ -88,7 +88,7 @@ def data_json_cal(data: dict | None, what_d: CalMod):
                 "fail_rsn": str(e),
             }
 
-    _big_label("[3] 성능 분석 (평균/10회)")
+    _big_label(f"[3] 성능 분석 (평균/10회)\n데이터 평탄화 모드 : {what_d}")
     print(f"{'크기':<10}{'평균 시간(ms)':>12}{'연산 횟수':>12}")
     print("-" * 34)
     for size, log in test_log_saves.items():

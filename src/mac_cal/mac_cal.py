@@ -82,7 +82,7 @@ class MacCal:
             print(f"MAC 연산 오류: {e}")
 
     def handle_data_json(self):
-        data_json_cal(self.data_json)
+        data_json_cal(self.data_json, self.what_d)
         return
 
     def set_flatten_mod(self):
