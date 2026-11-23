@@ -43,6 +43,9 @@ def mac_calculate(
                     score_b += filter_b[y][x] * value
                     operation_count += 1
 
+        # _2d 대비 _1d 전환시 유의미하게 성능이 좋으려면
+        # 기존 PatternMatrix 타입은 그대로 쓰면서 이걸 전환 로직까지 포함 하고도 성능상에 우위에 있어야 함
+        # 굳이 PatternMatrix 타입 까지 변경 하면서 레거시 코드를 수정해야만 고성능을 보인다면 채용 가치는 적음
         case "_1d":
             fm_fa, fm_fb, fm_p = _flatten_matrices([filter_a, filter_b, pattern])
             for idx, value in enumerate(fm_p):

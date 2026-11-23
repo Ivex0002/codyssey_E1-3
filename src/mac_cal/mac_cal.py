@@ -3,7 +3,7 @@ from data_class.simple_pattern import SimplePattern
 import json
 from .handle_user_input_pattern.custom_input import custom_input
 from .handle_user_input_pattern.simple_input import simple_input
-from .calculate.mac_calculate import mac_calculate
+from .calculate.mac_calculate import mac_calculate, CalMod
 from .calculate.data_json_cal import data_json_cal
 
 path = {
@@ -18,6 +18,7 @@ class MacCal:
         self.data_json: dict | None = None
         # 유저 입력 패턴이 장기저장 필요한가?
         # self.patterns: list[SimplePattern]
+        self.what_d: CalMod = "_2d"
 
         self.load()
 
@@ -81,8 +82,15 @@ class MacCal:
         data_json_cal(self.data_json)
         return
 
+    def set_flatten_mod(self):
+        print(f"현재 데이터 평탄화 모드는 {self.what_d} 입니다\n 모드를 선택해주세요")
+        menu: list[CalMod] = ["_1d", "_2d"]
+        user_input = choice(menu)
+        self.what_d = menu[user_input - 1]
+        print(f"데이터 파싱 구조가 변경 되었습니다 : {self.what_d}\n")
+
     def run(self):
-        menu = ["사용자 입력", "data.json 분석", "종료"]
+        menu = ["사용자 입력", "data.json 분석", "배열 평탄화 모드", "종료"]
         try:
             while True:
                 print("===Mini NPU Simulator===")
@@ -100,6 +108,9 @@ class MacCal:
                         self.handle_data_json()
                         continue
                     case 3:
+                        self.set_flatten_mod()
+                        continue
+                    case 4:
                         self.exit()
                         break
 
