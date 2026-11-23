@@ -36,4 +36,5 @@ size_25_1        0.126         625
 size_25_2        0.134         625
 ```
 
+- 위의 결과를 토대로 연산 크기가 커질수록 해당 [평탄화 로직](https://github.com/Ivex0002/codyssey_E1-3/blob/1c009a689d28b36e8dd07671801e65ca8babbbbc/src/mac_cal/calculate/mac_calculate.py#L81)이 연산 시간에 유의미하게 악영향을 끼친다고 볼 수 있습니
 </details>
