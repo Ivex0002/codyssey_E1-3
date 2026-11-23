@@ -3,7 +3,7 @@
 
 패턴 장기 저장시에 모든 값들을 저장하게 되면 메모리 비효율이 매우 커지므로, 단순화 가능한 항목들을 최대한 줄여 크기, 모양만을 입력받아 저장하도록 했습니다
 
-이를 실제 값으로 치환하기 위해선 [패턴 제너레이터 함수](../src/util/pattern/pattern_generator.py) 를 필요할때만 호출하도록 구성했습니다.
+이를 실제 값으로 치환하기 위해 [패턴 제너레이터 함수](../src/util/pattern/pattern_generator.py) 를 필요할때만 호출하도록 구성했습니다.
 
 ## 2. 모드 1 입력 처리(3×3)
 [3x3 유저 입력 받기](../src/mac_cal/handle_user_input_pattern/custom_input.py)
