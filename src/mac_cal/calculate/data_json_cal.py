@@ -1,6 +1,6 @@
 from typing import TypeAlias, Literal, TypedDict
 from data_class.type import PatternMatrix
-from .mac_calculate import mac_calculate
+from .mac_calculate import mac_calculate, CalMod
 from util import validate_score, quick_test
 
 # data.json 파싱용 편의 함수
@@ -32,7 +32,7 @@ class _TestLogSave(TypedDict):
     fail_rsn: str | None
 
 
-def data_json_cal(data: dict | None):
+def data_json_cal(data: dict | None, what_d: CalMod):
     if not data:
         raise ValueError("data.json은 유효한 파일이 아닙니다")
 
@@ -53,7 +53,7 @@ def data_json_cal(data: dict | None):
         _small_label(size)
         found_filter = filters[_size_for_filter(size)]
         result = mac_calculate(
-            found_filter["cross"], found_filter["x"], pattern["input"]
+            found_filter["cross"], found_filter["x"], pattern["input"], what_d
         )
         try:
             score_cross, score_x, operation_count = result()
