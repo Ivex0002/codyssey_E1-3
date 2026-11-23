@@ -164,3 +164,19 @@ result = mac_calculate(
 <img width="527" height="132" alt="image" src="https://github.com/user-attachments/assets/cf0d653e-e57b-4b3d-8ff1-83e664a83c43" />
 
 - 미션 요구지에는 Cross, X 만이 제시되어 있었으나, ux 관점에서 각각의 키값과 터미널 출력물이 일관되고 안정적인 데이터 제공을 위해 [필터 명, 패턴 명을 Enum을 활용](../src/mac_cal/handle_user_input_pattern/pattern_enum.py)하여 작성했습니다
+
+## 5. MAC 연산
+[MAC 연산 함수](../src/mac_cal/calculate/mac_calculate.py)
+```
+for y, row in enumerate(pattern):
+  for x, value in enumerate(row):
+    score_a += filter_a[y][x] * value
+    score_b += filter_b[y][x] * value
+    operation_count += 1
+```
+위와 같이 이중 for 문으로 작성하여 각각의 y, x 위치를 인덱싱하여 찾은 후 패턴의 값과 필터의 값을 곱하는 방식을 사용했습니다
+
+## 6. 점수 비교 정책
+[점수 판정 함수](../src/util/validate/validate_score.py)
+- 제시된 권장 기준을 토대로 각각의 점수 차이가 1e-9 미만이면 False를 리턴합니다
+- 또한 테스트 결과 클래스인 [TestLog](../src/util/testing_function/test_log.py) 를 활용하여 계산에 걸린 평균 시간도 같이 리턴해주도록 구성했습니다.
