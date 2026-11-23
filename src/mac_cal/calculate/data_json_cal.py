@@ -1,7 +1,7 @@
 from typing import TypeAlias, Literal, TypedDict
 from data_class.type import PatternMatrix
 from .mac_calculate import mac_calculate
-from util import TestLog, validate_score, quick_test
+from util import validate_score, quick_test
 
 # data.json 파싱용 편의 함수
 # 외부에선 쓰일 일이 없으므로 내부 타입으로 지정
@@ -49,10 +49,12 @@ def data_json_cal(data: dict | None):
     # [3] 성능 분석용 변수
     test_log_saves: dict[str, _TestLogSave] = {}
 
-    for size, log in patterns.items():
+    for size, pattern in patterns.items():
         _small_label(size)
         found_filter = filters[_size_for_filter(size)]
-        result = mac_calculate(found_filter["cross"], found_filter["x"], log["input"])
+        result = mac_calculate(
+            found_filter["cross"], found_filter["x"], pattern["input"]
+        )
         try:
             score_cross, score_x, operation_count = result()
             _print_score(score_cross, score_x)
@@ -61,13 +63,13 @@ def data_json_cal(data: dict | None):
 
             if can_cal:
                 jud = "Cross" if score_cross > score_x else "X"
-                is_pass = jud.lower() == log["expected"].lower()
+                is_pass = jud.lower() == pattern["expected"].lower()
                 fail_rsn = None if is_pass else "기대 결과와 판정 결과 불일치"
-                _print_jud(jud, log["expected"])
+                _print_jud(jud, pattern["expected"])
             else:
                 is_pass = False
                 fail_rsn = "동점(UNDECIDED) 처리 규칙에 따라 FAIL"
-                _print_jud(None, log["expected"])
+                _print_jud(None, pattern["expected"])
 
             # 저장
             test_log_saves[size] = {
