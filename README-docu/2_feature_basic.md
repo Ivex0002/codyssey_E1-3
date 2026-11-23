@@ -65,7 +65,7 @@ B 점수: 4.0
 
 </details>
 
-## 모드 2 JSON 로드 및 스키마 검증(data.json)
+## 3. 모드 2 JSON 로드 및 스키마 검증(data.json)
 [data.json 파싱 및 계산 로직](../src/mac_cal/calculate/data_json_cal.py)
 - `patterns의 각 항목에 대해, 키에서 N을 추출하여 해당 size_N 필터를 선택해야 한다` 라고 요구조건에 나와 있었으나, 이는 굳이 N으로 따로 저장할 필요가 없다고 판단했습니다.
 - 패턴의 `size_{N}_{idx}` 형식의 키값에서 마지막 "_" 앞의 문자열만 파싱하여 즉시 필터 목록에서 이를 찾도록 로직을 짰습니다.
@@ -150,3 +150,17 @@ size_25_2        0.105         625
 ```
 
 </details>
+
+## 4. 라벨 정규화(표준화) 필수 구현
+- Cross, X의 경우 패턴상에서의 expected 값과 필터의 키값들이 서로 다르기 때문에 데이터 비교를 위해 이를 일치시킬 필요가 있습니다
+- 이를 위해서 [필터의 타입](https://github.com/Ivex0002/codyssey_E1-3/blob/7af54241c26cafbcc5c3aebb0b9b2f61e5359788/src/mac_cal/calculate/data_json_cal.py#L10), [패턴의 타입](https://github.com/Ivex0002/codyssey_E1-3/blob/7af54241c26cafbcc5c3aebb0b9b2f61e5359788/src/mac_cal/calculate/data_json_cal.py#L15) 을 각각 따로 지정하여 작성했습니다.
+- 이로 인해 각각 필터와 패턴의 타입이 vscode 상에서 명확하게 잡히므로 인자를 전달할 때 아래와 같이 특정 키를 검색하기 매우 쉬워지며, 이것들의 리턴값 또한 명확하게 잡히므로 비교 연산시에 버그를 사전에 방지할수 있는 이점이 있습니다
+```
+found_filter = filters[_size_for_filter(size)]
+result = mac_calculate(
+    found_filter["cross"], found_filter["x"], pattern["input"], what_d
+)
+```
+<img width="527" height="132" alt="image" src="https://github.com/user-attachments/assets/cf0d653e-e57b-4b3d-8ff1-83e664a83c43" />
+
+- 미션 요구지에는 Cross, X 만이 제시되어 있었으나, ux 관점에서 각각의 키값과 터미널 출력물이 일관되고 안정적인 데이터 제공을 위해 [필터 명, 패턴 명을 Enum을 활용](../src/mac_cal/handle_user_input_pattern/pattern_enum.py)하여 작성했습니다
