@@ -2,7 +2,7 @@
 [패턴 제너레이터를 활용한 패턴 클래스](src/data_class/simple_pattern.py)
 
 ## 2. 모드 1 입력 처리(3×3)
-[3x3 유저 입력 받기](src/mac_cal/handle_user_input_pattern/custom_input.py)
+[3x3 유저 입력 받기](../src/mac_cal/handle_user_input_pattern/custom_input.py)
 
 <details>
 <summary>모드 1 유저 실행 흐름 예시</summary>
@@ -62,7 +62,7 @@ B 점수: 4.0
 </details>
 
 ## 모드 2 JSON 로드 및 스키마 검증(data.json)
-[data.json 파싱 및 계산 로직](src/mac_cal/calculate/data_json_cal.py)
+[data.json 파싱 및 계산 로직](../src/mac_cal/calculate/data_json_cal.py)
 - `patterns의 각 항목에 대해, 키에서 N을 추출하여 해당 size_N 필터를 선택해야 한다` 라고 요구조건에 나와 있었으나, 이는 굳이 N으로 따로 저장할 필요가 없다고 판단했습니다.
 - 패턴의 `size_{N}_{idx}` 형식의 키값에서 마지막 "_" 앞의 문자열만 파싱하여 즉시 필터 목록에서 이를 찾도록 로직을 짰습니다.
 - data.json 뿐만 아니라 유저 입력시에도 모든 배열의 길이가 같은지 검증이 필요하다고 판단하여 [검증 유틸 함수](https://github.com/Ivex0002/codyssey_E1-3/blob/d139b94938ed2089d4b411c85c8698de6e05d5c8/src/mac_cal/calculate/mac_calculate.py#L61) 로 mac 연산마다 검증을 사전에 실행하도록 했습니다
