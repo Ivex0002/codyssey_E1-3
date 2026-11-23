@@ -1,5 +1,5 @@
 ## 1. 시뮬레이터 최적화
-[데이터 평탄화 로직](https://github.com/Ivex0002/codyssey_E1-3/blob/e161b66c9af3bcd28e81f7f5ac964caba33ef2e6/src/mac_cal/calculate/mac_calculate.py#L20)
+[데이터 평탄화 분기 처리 + MAC 계산 함수](../src/mac_cal/calculate/mac_calculate.py)
 - 2차원 배열을 1차원 배열로 전환하여 연산하는 로직입니다
 - 기존 2차원 배열이 개발자 입장에서 치명적인 오류를 방지하고 가독성이 매우 좋기 때문에, 이를 그대로 두었습니다
 - 따라서 실제 연산시에는 2차원 > 1차원 으로 평탄화 작업을 넣어 이런 추가 작업을 가지고도 유의미한 연산 효율에 강점이 있는지를 보았습니다
