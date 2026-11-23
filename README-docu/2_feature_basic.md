@@ -4,7 +4,9 @@
 ## 2. 모드 1 입력 처리(3×3)
 [3x3 유저 입력 받기](src/mac_cal/handle_user_input_pattern/custom_input.py)
 
-- 유저 실행 흐름 예시
+<details>
+<summary>유저 실행 흐름 예시</summary>
+  
 ```
 $ python -m main
 ===Mini NPU Simulator===
@@ -56,5 +58,7 @@ B 점수: 4.0
 연산 시간(평균/10회): 0.011 ms
 판정: B
 ```
+
+</details>
 
 ##
