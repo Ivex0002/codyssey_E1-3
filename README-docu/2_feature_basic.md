@@ -1,5 +1,5 @@
 ## 1. 데이터 구조
-[패턴 제너레이터를 활용한 패턴 클래스](src/data_class/simple_pattern.py)
+[패턴 제너레이터를 활용한 패턴 클래스](../src/data_class/simple_pattern.py)
 
 ## 2. 모드 1 입력 처리(3×3)
 [3x3 유저 입력 받기](../src/mac_cal/handle_user_input_pattern/custom_input.py)
