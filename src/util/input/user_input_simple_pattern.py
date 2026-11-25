@@ -1,6 +1,6 @@
 from data_class.type import PatternMatrix, PatternShape
 from data_class.simple_pattern import SimplePattern
-from util import choice
+from ..input.choice import choice
 
 
 def user_input_simple_pattern(size: int) -> PatternMatrix:

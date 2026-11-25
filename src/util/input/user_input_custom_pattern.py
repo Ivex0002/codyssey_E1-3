@@ -1,5 +1,5 @@
 from data_class.type import PatternMatrix
-from util import validate_pattern
+from ..validate.validate_pattern import validate_pattern
 
 
 def user_input_custom_pattern(size: int) -> PatternMatrix:
