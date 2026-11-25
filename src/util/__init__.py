@@ -17,6 +17,7 @@ from .input.choice import choice
 
 # from .input._user_input_pattern import user_input_simple_pattern
 from .input.user_input_custom_pattern import user_input_custom_pattern
+from .input.user_input_simple_pattern import user_input_simple_pattern
 
 # =====================================
 # pattern

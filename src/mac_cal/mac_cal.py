@@ -4,9 +4,7 @@ from util import (
     print_pattern,
     quick_test,
     print_result,
-    check_int_user_input,
 )
-from data_class.simple_pattern import SimplePattern
 import json
 from .calculate.mac_calculate import mac_calculate, CalMod
 from .calculate.data_json_cal import data_json_cal
@@ -63,9 +61,6 @@ class MacCal:
 
         # user_input = custom_input() if chosen_menu == menu[0] else simple_input()
         user_input = user_inpt_pattern()
-
-        print("패턴, 필터의 크기를 3 이상의 자연수로 입력해주세요(NxN)")
-        size = check_int_user_input(99, 3)
 
         for key, val in user_input.items():
             print_pattern(key, val)

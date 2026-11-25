@@ -1,8 +1,8 @@
-from typing import Literal
 from ..validate.validate_pattern import validate_pattern
+from ...data_class.type import PatternShape
 
 
-def pattern_generator(size: int, shape: Literal["x", "+"]):
+def pattern_generator(size: int, shape: PatternShape):
     """2차원 배열 x or + 생성 함수"""
 
     if not validate_pattern.size(size) or not validate_pattern.shape(shape):

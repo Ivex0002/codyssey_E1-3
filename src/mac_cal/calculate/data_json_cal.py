@@ -1,5 +1,5 @@
 from typing import TypeAlias, Literal, TypedDict
-from data_class.type import PatternMatrix
+from data_class.type import PatternMatrix, PatternShape
 from .mac_calculate import mac_calculate, CalMod
 from util import validate_score, quick_test
 
@@ -12,13 +12,11 @@ _FilterShape: TypeAlias = Literal["cross", "x"]
 _FilterData: TypeAlias = dict[_FilterShape, PatternMatrix]
 _FilterCollection: TypeAlias = dict[str, _FilterData]
 
+
 # 패턴
-_PatternShape: TypeAlias = Literal["+", "x"]
-
-
 class _PatternData(TypedDict):
     input: PatternMatrix
-    expected: _PatternShape
+    expected: PatternShape
 
 
 _PatternCollection: TypeAlias = dict[str, _PatternData]
