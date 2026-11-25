@@ -1,5 +1,6 @@
 from typing import TypeAlias, Literal, TypedDict
 from data_class.type import PatternMatrix, PatternShape
+from data_class.pattern_enum import PatternInputData
 from .mac_calculate import mac_calculate, CalMod
 from util import validate_score, quick_test
 
@@ -50,9 +51,13 @@ def data_json_cal(data: dict | None, what_d: CalMod):
     for size, pattern in patterns.items():
         _small_label(size)
         found_filter = filters[_size_for_filter(size)]
-        result = mac_calculate(
-            found_filter["cross"], found_filter["x"], pattern["input"], what_d
-        )
+        pattern_data: PatternInputData = {
+            "filter_a": found_filter["cross"],
+            "filter_b": found_filter["x"],
+            "pattern": pattern["input"],
+        }
+
+        result = mac_calculate(pattern_data, what_d)
         try:
             score_cross, score_x, operation_count = result()
             _print_score(score_cross, score_x)

@@ -1,4 +1,4 @@
-from .pattern_enum import PatternEnum, PatternInputData
+from data_class.pattern_enum import PatternEnum, PatternInputData
 from util import (
     check_int_user_input,
     choice,

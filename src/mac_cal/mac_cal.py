@@ -67,9 +67,7 @@ class MacCal:
         print("입력된 값은 위와 같습니다\nMAC 연산을 실행합니다")
 
         cal_result = mac_calculate(
-            user_input["filter_a"],
-            user_input["filter_b"],
-            user_input["pattern"],
+            user_input,
             self.what_d,
         )
 

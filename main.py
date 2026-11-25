@@ -14,8 +14,10 @@ if __name__ == "__main__":
 # todo
 # 1. 사용자 입력 패턴/필터 입력 받을때 사이즈 먼저 1회 입력 > 매 패턴 필터마다 커스텀 입력 여부 받기
 # 3x3 강제 하는게 문제
+# v
 
 # 2. 행렬 길이 불일치시 사용자 입력 다시 받기
+# v
 
 # 3. 필터 키 정규화 하라는데 필수적인가? 정규화 말고 타입 Literal 로 따지는게 편하지 않나
 # src/mac_cal/calculate/data_json_cal.py > 'is_pass = jud.lower() == pattern["expected"].lower()'
