@@ -171,10 +171,15 @@ size_25_2        0.105         625
 - 이로 인해 각각 필터와 패턴의 타입이 vscode 상에서 명확하게 잡히므로 인자를 전달할 때 아래와 같이 특정 키를 검색하기 매우 쉬워지며, 이것들의 리턴값 또한 명확하게 잡히므로 비교 연산시에 버그를 사전에 방지할수 있는 이점이 있습니다
 - 문자열 정규화의 경우 이렇게 데이터 구조 자체가 다른 경우, 각각의 타입을 따로 지정하는 것이 알맞습니다. 추후에 많은 키들이 추가될경우 그때는 Enum으로써 선언하여 각각의 문자열과 이름을 매칭시키는 것이 나을 것입니다.
 ```
-found_filter = filters[_size_for_filter(size)]
-result = mac_calculate(
-    found_filter["cross"], found_filter["x"], pattern["input"], what_d
-)
+# 필터
+_FilterShape: TypeAlias = Literal["cross", "x"]
+_FilterData: TypeAlias = dict[_FilterShape, PatternMatrix]
+
+# 패턴
+PatternShape = Literal["+", "x"]
+class _PatternData(TypedDict):
+    input: PatternMatrix
+    expected: PatternShape
 ```
 <img width="527" height="132" alt="image" src="https://github.com/user-attachments/assets/cf0d653e-e57b-4b3d-8ff1-83e664a83c43" />
 
