@@ -1,3 +1,6 @@
+from data_class.type import PATTERN_SHAPES, PatternMatrix
+
+
 class ValidatePattern:
     @staticmethod
     def size(size: int) -> bool:
@@ -7,7 +10,11 @@ class ValidatePattern:
     @staticmethod
     def shape(shape: str) -> bool:
         # print(f"debug: {shape}")
-        return shape in ("x", "+")
+        return shape in PATTERN_SHAPES
+
+    @staticmethod
+    def is_right_size_pattern(size: int, pattern: PatternMatrix) -> bool:
+        return len(pattern) == size and all(len(row) == size for row in pattern)
 
 
 validate_pattern = ValidatePattern()

@@ -1,6 +1,12 @@
-from data_class.type import PatternMatrix
+from data_class.type import PatternMatrix, PatternShape
+from data_class.simple_pattern import SimplePattern
+from util import choice
 
 
 def user_input_simple_pattern(size: int) -> PatternMatrix:
-    menu = 
-    return
+    menu: list[PatternShape] = ["x", "+"]
+    print("아래에 기입된 형태 중 하나를 번호로 선택해주세요")
+
+    chosen_menu = menu[choice(menu) - 1]
+
+    return SimplePattern(size, chosen_menu).show
