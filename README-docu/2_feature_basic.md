@@ -5,8 +5,8 @@
 
 이를 실제 값으로 치환하기 위해 [패턴 제너레이터 함수](../src/util/pattern/pattern_generator.py) 를 필요할때만 호출하도록 구성했습니다.
 
-## 2. 모드 1 입력 처리(3×3)
-[3x3 유저 입력 받기](../src/mac_cal/handle_user_input_pattern/custom_input.py)
+## 2. 모드 1 입력 처리(NxN)
+[NxN 유저 입력 받기](../src/mac_cal/handle_user_input_pattern/user_inpt_pattern.py)
 
 <details>
 <summary>모드 1 유저 실행 흐름 예시</summary>
