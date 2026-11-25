@@ -1,10 +1,16 @@
-from util import choice, TestLog, print_pattern, quick_test, print_result
+from util import (
+    choice,
+    TestLog,
+    print_pattern,
+    quick_test,
+    print_result,
+    check_int_user_input,
+)
 from data_class.simple_pattern import SimplePattern
 import json
-from .handle_user_input_pattern.custom_input import custom_input
-from .handle_user_input_pattern.simple_input import simple_input
 from .calculate.mac_calculate import mac_calculate, CalMod
 from .calculate.data_json_cal import data_json_cal
+from handle_user_input_pattern.handle_user_input_pattern import user_inpt_pattern
 
 path = {
     "data_json_path": r"data/data.json",
@@ -50,12 +56,16 @@ class MacCal:
         print("프로그램을 종료합니다.")
 
     def input_pattern(self):
-        menu = ["3x3", "패턴 생성기(보너스)"]
-        chosen_menu = menu[choice(menu) - 1]
+        # menu = ["3x3", "패턴 생성기(보너스)"]
+        # chosen_menu = menu[choice(menu) - 1]
 
-        # print("debug:" + chosen_menu)
+        # # print("debug:" + chosen_menu)
 
-        user_input = custom_input() if chosen_menu == menu[0] else simple_input()
+        # user_input = custom_input() if chosen_menu == menu[0] else simple_input()
+        user_input = user_inpt_pattern()
+
+        print("패턴, 필터의 크기를 3 이상의 자연수로 입력해주세요(NxN)")
+        size = check_int_user_input(99, 3)
 
         for key, val in user_input.items():
             print_pattern(key, val)
