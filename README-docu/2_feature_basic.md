@@ -5,14 +5,13 @@
 
 이를 실제 값으로 치환하기 위해 [패턴 제너레이터 함수](../src/util/pattern/pattern_generator.py) 를 필요할때만 호출하도록 구성했습니다.
 
-## 2. 모드 1 입력 처리(3×3)
-[3x3 유저 입력 받기](../src/mac_cal/handle_user_input_pattern/custom_input.py)
+## 2. 모드 1 입력 처리(NxN)
+[NxN 유저 입력 받기](../src/mac_cal/handle_user_input_pattern/user_inpt_pattern.py)
 
 <details>
 <summary>모드 1 유저 실행 흐름 예시</summary>
   
 ```
-$ python -m main
 ===Mini NPU Simulator===
 모드를 선택해주세요
 
@@ -22,34 +21,49 @@ $ python -m main
 3. 배열 평탄화 모드
 4. 종료
 선택: 1
-
-
-1. 3x3
-2. 패턴 생성기(보너스)
-선택: 1
+패턴, 필터의 크기를 3 이상의 홀수인 자연수로 입력해주세요(NxN)
+선택: 3
 [1]필터 A를 입력하세요
-0 1 0
-1 1 1
-0 1 0
-[2]필터 B를 입력하세요
-1 1 1
-0 0 0
-1 1 1
-[3]패턴를 입력하세요
+
+
+1. 직접입력
+2. 패턴생성기 활용
+선택: 1
 1 0 1
 0 1 0
+1 0 1
+[2]필터 B를 입력하세요
+
+
+1. 직접입력
+2. 패턴생성기 활용
+선택: 2
+아래에 기입된 형태 중 하나를 번호로 선택해주세요
+
+
+1. x
+2. +
+선택: 2
+[3]패턴를 입력하세요
+
+
+1. 직접입력
+2. 패턴생성기 활용
+선택: 1
+1 0 1
+0 0 0
 1 0 1
 ===filter_a===
-0.0 1.0 0.0
-1.0 1.0 1.0
-0.0 1.0 0.0
-===filter_b===
-1.0 1.0 1.0
-0.0 0.0 0.0
-1.0 1.0 1.0
-===pattern===
 1.0 0.0 1.0
 0.0 1.0 0.0
+1.0 0.0 1.0
+===filter_b===
+0.0 1.0 0.0
+1.0 1.0 1.0
+0.0 1.0 0.0
+===pattern===
+1.0 0.0 1.0
+0.0 0.0 0.0
 1.0 0.0 1.0
 입력된 값은 위와 같습니다
 MAC 연산을 실행합니다
@@ -57,10 +71,10 @@ MAC 연산을 실행합니다
 #---------------------------------------
 MAC 결과
 #---------------------------------------
-A 점수: 1.0
-B 점수: 4.0
-연산 시간(평균/10회): 0.011 ms
-판정: B
+A 점수: 4.0
+B 점수: 0.0
+연산 시간(평균/10회): 0.006 ms
+판정: A
 ```
 
 </details>
@@ -153,7 +167,7 @@ size_25_2        0.105         625
 
 ## 4. 라벨 정규화(표준화) 필수 구현
 - Cross, X의 경우 패턴상에서의 expected 값과 필터의 키값들이 서로 다르기 때문에 데이터 비교를 위해 이를 일치시킬 필요가 있습니다
-- 이를 위해서 [필터의 타입](https://github.com/Ivex0002/codyssey_E1-3/blob/7af54241c26cafbcc5c3aebb0b9b2f61e5359788/src/mac_cal/calculate/data_json_cal.py#L10), [패턴의 타입](https://github.com/Ivex0002/codyssey_E1-3/blob/7af54241c26cafbcc5c3aebb0b9b2f61e5359788/src/mac_cal/calculate/data_json_cal.py#L15) 을 각각 따로 지정하여 작성했습니다.
+- 이를 위해서 [필터의 타입](https://github.com/Ivex0002/codyssey_E1-3/blob/f1be8caf624484d700fa58e127826713c4cf2a47/src/mac_cal/calculate/data_json_cal.py#L10), [패턴의 타입](https://github.com/Ivex0002/codyssey_E1-3/blob/fa081f53adc96b84ab9bf70b0e5d3ed0fa76d9c4/src/mac_cal/calculate/data_json_cal.py#L16) 을 각각 따로 지정하여 작성했습니다.
 - 이로 인해 각각 필터와 패턴의 타입이 vscode 상에서 명확하게 잡히므로 인자를 전달할 때 아래와 같이 특정 키를 검색하기 매우 쉬워지며, 이것들의 리턴값 또한 명확하게 잡히므로 비교 연산시에 버그를 사전에 방지할수 있는 이점이 있습니다
 ```
 found_filter = filters[_size_for_filter(size)]
