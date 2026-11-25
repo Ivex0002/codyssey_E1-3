@@ -1,5 +1,5 @@
 from ..validate.validate_pattern import validate_pattern
-from ...data_class.type import PatternShape
+from data_class.type import PatternShape
 
 
 def pattern_generator(size: int, shape: PatternShape):

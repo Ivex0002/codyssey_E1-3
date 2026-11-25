@@ -4,12 +4,22 @@ from util import (
     choice,
     user_input_custom_pattern,
     user_input_simple_pattern,
+    validate_pattern,
 )
 
 
 def user_inpt_pattern() -> PatternInputData:
-    print("패턴, 필터의 크기를 3 이상의 자연수로 입력해주세요(NxN)")
-    size = check_int_user_input(99, 3)
+    print("패턴, 필터의 크기를 3 이상의 홀수인 자연수로 입력해주세요(NxN)")
+    while True:
+        size = check_int_user_input(99, 3)
+        is_right_size = validate_pattern.size(size)
+
+        if is_right_size:
+            break
+        else:
+            print("잘못된 입력입니다. 다시 입력해주세요\n")
+            continue
+
     user_input: PatternInputData = {}
 
     for idx, item in enumerate(PatternEnum):

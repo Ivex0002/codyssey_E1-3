@@ -8,7 +8,7 @@ from util import (
 import json
 from .calculate.mac_calculate import mac_calculate, CalMod
 from .calculate.data_json_cal import data_json_cal
-from handle_user_input_pattern.handle_user_input_pattern import user_inpt_pattern
+from mac_cal.handle_user_input_pattern.user_inpt_pattern import user_inpt_pattern
 
 path = {
     "data_json_path": r"data/data.json",
