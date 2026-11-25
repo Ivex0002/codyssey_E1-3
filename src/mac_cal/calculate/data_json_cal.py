@@ -72,9 +72,7 @@ def data_json_cal(data: dict | None, what_d: CalMod):
             can_cal, cal_time = validate_score(score_cross, score_x, result_log)
 
             if can_cal:
-                jud = (
-                    PATTERN_MAP["cross"] if score_cross > score_x else PATTERN_MAP["x"]
-                )
+                jud = PATTERN_MAP["cross" if score_cross > score_x else "x"]
                 is_pass = jud == pattern["expected"]
                 fail_rsn = None if is_pass else "기대 결과와 판정 결과 불일치"
                 _print_jud(jud, pattern["expected"])
