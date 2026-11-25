@@ -167,7 +167,7 @@ size_25_2        0.105         625
 
 ## 4. 라벨 정규화(표준화) 필수 구현
 - Cross, X의 경우 패턴상에서의 expected 값과 필터의 키값들이 서로 다르기 때문에 데이터 비교를 위해 이를 일치시킬 필요가 있습니다
-- 이를 위해서 [필터의 타입](https://github.com/Ivex0002/codyssey_E1-3/blob/7af54241c26cafbcc5c3aebb0b9b2f61e5359788/src/mac_cal/calculate/data_json_cal.py#L10), [패턴의 타입](https://github.com/Ivex0002/codyssey_E1-3/blob/fa081f53adc96b84ab9bf70b0e5d3ed0fa76d9c4/src/mac_cal/calculate/data_json_cal.py#L16) 을 각각 따로 지정하여 작성했습니다.
+- 이를 위해서 [필터의 타입](https://github.com/Ivex0002/codyssey_E1-3/blob/f1be8caf624484d700fa58e127826713c4cf2a47/src/mac_cal/calculate/data_json_cal.py#L10), [패턴의 타입](https://github.com/Ivex0002/codyssey_E1-3/blob/fa081f53adc96b84ab9bf70b0e5d3ed0fa76d9c4/src/mac_cal/calculate/data_json_cal.py#L16) 을 각각 따로 지정하여 작성했습니다.
 - 이로 인해 각각 필터와 패턴의 타입이 vscode 상에서 명확하게 잡히므로 인자를 전달할 때 아래와 같이 특정 키를 검색하기 매우 쉬워지며, 이것들의 리턴값 또한 명확하게 잡히므로 비교 연산시에 버그를 사전에 방지할수 있는 이점이 있습니다
 ```
 found_filter = filters[_size_for_filter(size)]
