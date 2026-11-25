@@ -22,6 +22,13 @@ class _PatternData(TypedDict):
 
 _PatternCollection: TypeAlias = dict[str, _PatternData]
 
+# 데이터 정규화
+# filter:pattern
+PATTERN_MAP = {
+    "cross": "+",
+    "x": "x",
+}
+
 
 # 테스트 로그 세이브 변수
 class _TestLogSave(TypedDict):
@@ -65,8 +72,10 @@ def data_json_cal(data: dict | None, what_d: CalMod):
             can_cal, cal_time = validate_score(score_cross, score_x, result_log)
 
             if can_cal:
-                jud = "Cross" if score_cross > score_x else "X"
-                is_pass = jud.lower() == pattern["expected"].lower()
+                jud = (
+                    PATTERN_MAP["cross"] if score_cross > score_x else PATTERN_MAP["x"]
+                )
+                is_pass = jud == pattern["expected"]
                 fail_rsn = None if is_pass else "기대 결과와 판정 결과 불일치"
                 _print_jud(jud, pattern["expected"])
             else:
