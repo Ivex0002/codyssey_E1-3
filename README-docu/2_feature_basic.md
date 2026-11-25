@@ -1,4 +1,5 @@
 ## 1. 데이터 구조
+
 [패턴 제너레이터를 활용한 패턴 클래스](../src/data_class/simple_pattern.py)
 
 패턴 장기 저장시에 모든 값들을 저장하게 되면 메모리 비효율이 매우 커지므로, 단순화 가능한 항목들을 최대한 줄여 크기, 모양만을 입력받아 저장하도록 했습니다
@@ -6,6 +7,7 @@
 이를 실제 값으로 치환하기 위해 [패턴 제너레이터 함수](../src/util/pattern/pattern_generator.py) 를 필요할때만 호출하도록 구성했습니다.
 
 ## 2. 모드 1 입력 처리(NxN)
+
 [NxN 유저 입력 받기](../src/mac_cal/handle_user_input_pattern/user_inpt_pattern.py)
 
 <details>
@@ -15,58 +17,52 @@
 ===Mini NPU Simulator===
 모드를 선택해주세요
 
-
 1. 사용자 입력
 2. data.json 분석
 3. 배열 평탄화 모드
 4. 종료
-선택: 1
-패턴, 필터의 크기를 3 이상의 홀수인 자연수로 입력해주세요(NxN)
-선택: 3
-[1]필터 A를 입력하세요
+   선택: 1
+   패턴, 필터의 크기를 3 이상의 홀수인 자연수로 입력해주세요(NxN)
+   선택: 3
+   [1]필터 A를 입력하세요
 
+5. 직접입력
+6. 패턴생성기 활용
+   선택: 1
+   1 0 1
+   0 1 0
+   1 0 1
+   [2]필터 B를 입력하세요
 
-1. 직접입력
-2. 패턴생성기 활용
-선택: 1
-1 0 1
-0 1 0
-1 0 1
-[2]필터 B를 입력하세요
+7. 직접입력
+8. 패턴생성기 활용
+   선택: 2
+   아래에 기입된 형태 중 하나를 번호로 선택해주세요
 
+9. x
+10. - 선택: 2
+      [3]패턴를 입력하세요
 
-1. 직접입력
-2. 패턴생성기 활용
-선택: 2
-아래에 기입된 형태 중 하나를 번호로 선택해주세요
-
-
-1. x
-2. +
-선택: 2
-[3]패턴를 입력하세요
-
-
-1. 직접입력
-2. 패턴생성기 활용
-선택: 1
-1 0 1
-0 0 0
-1 0 1
-===filter_a===
-1.0 0.0 1.0
-0.0 1.0 0.0
-1.0 0.0 1.0
-===filter_b===
-0.0 1.0 0.0
-1.0 1.0 1.0
-0.0 1.0 0.0
-===pattern===
-1.0 0.0 1.0
-0.0 0.0 0.0
-1.0 0.0 1.0
-입력된 값은 위와 같습니다
-MAC 연산을 실행합니다
+11. 직접입력
+12. 패턴생성기 활용
+    선택: 1
+    1 0 1
+    0 0 0
+    1 0 1
+    ===filter_a===
+    1.0 0.0 1.0
+    0.0 1.0 0.0
+    1.0 0.0 1.0
+    ===filter_b===
+    0.0 1.0 0.0
+    1.0 1.0 1.0
+    0.0 1.0 0.0
+    ===pattern===
+    1.0 0.0 1.0
+    0.0 0.0 0.0
+    1.0 0.0 1.0
+    입력된 값은 위와 같습니다
+    MAC 연산을 실행합니다
 
 #---------------------------------------
 MAC 결과
@@ -75,6 +71,7 @@ A 점수: 4.0
 B 점수: 0.0
 연산 시간(평균/10회): 0.006 ms
 판정: A
+
 ```
 
 </details>
@@ -89,24 +86,24 @@ B 점수: 0.0
 <summary>모드 2 유저 실행 흐름 예시</summary>
 
 ```
+
 ===Mini NPU Simulator===
 모드를 선택해주세요
-
 
 1. 사용자 입력
 2. data.json 분석
 3. 배열 평탄화 모드
 4. 종료
-선택: 2
-#---------------------------------------
-[1] 필터 로드
-#---------------------------------------
-✓ size_5 필터 로드 완료 (Cross, X)
-✓ size_13 필터 로드 완료 (Cross, X)
-✓ size_25 필터 로드 완료 (Cross, X)
-#---------------------------------------
-[2] 패턴 분석
-#---------------------------------------
+   선택: 2
+   #---------------------------------------
+   [1] 필터 로드
+   #---------------------------------------
+   ✓ size_5 필터 로드 완료 (Cross, X)
+   ✓ size_13 필터 로드 완료 (Cross, X)
+   ✓ size_25 필터 로드 완료 (Cross, X)
+   #---------------------------------------
+   [2] 패턴 분석
+   #---------------------------------------
 
 ---size_5_1---
 Cross 점수 : 0.9
@@ -139,16 +136,18 @@ X 점수 : 0.1
 판정: Cross | expected: + | FAIL
 #---------------------------------------
 [3] 성능 분석 (평균/10회)
-데이터 평탄화 모드 : _2d
+데이터 평탄화 모드 : \_2d
 #---------------------------------------
-크기           평균 시간(ms)       연산 횟수
-----------------------------------
-size_5_1         0.009          25
-size_5_2         0.012          25
-size_13_1        0.033         169
-size_13_2        0.031         169
-size_25_1        0.097         625
-size_25_2        0.105         625
+크기 평균 시간(ms) 연산 횟수
+
+---
+
+size_5_1 0.009 25
+size_5_2 0.012 25
+size_13_1 0.033 169
+size_13_2 0.031 169
+size_25_1 0.097 625
+size_25_2 0.105 625
 #---------------------------------------
 [4] 결과 요약
 #---------------------------------------
@@ -156,11 +155,13 @@ size_25_2        0.105         625
 통과: 1개
 실패: 5개
 실패 케이스:
+
 - size_5_1 : 동점(UNDECIDED) 처리 규칙에 따라 FAIL
 - size_5_2 : 기대 결과와 판정 결과 불일치
 - size_13_2 : 동점(UNDECIDED) 처리 규칙에 따라 FAIL
 - size_25_1 : 동점(UNDECIDED) 처리 규칙에 따라 FAIL
 - size_25_2 : 기대 결과와 판정 결과 불일치
+
 ```
 
 </details>
@@ -171,15 +172,19 @@ size_25_2        0.105         625
 - 이로 인해 각각 필터와 패턴의 타입이 vscode 상에서 명확하게 잡히므로 인자를 전달할 때 아래와 같이 특정 키를 검색하기 매우 쉬워지며, 이것들의 리턴값 또한 명확하게 잡히므로 비교 연산시에 버그를 사전에 방지할수 있는 이점이 있습니다
 - 문자열 정규화의 경우 이렇게 데이터 구조 자체가 다른 경우, 각각의 타입을 따로 지정하는 것이 알맞습니다. 추후에 많은 키들이 추가될경우 그때는 Enum으로써 선언하여 각각의 문자열과 이름을 매칭시키는 것이 나을 것입니다.
 ```
+
 # 필터
-_FilterShape: TypeAlias = Literal["cross", "x"]
-_FilterData: TypeAlias = dict[_FilterShape, PatternMatrix]
+
+\_FilterShape: TypeAlias = Literal["cross", "x"]
+\_FilterData: TypeAlias = dict[_FilterShape, PatternMatrix]
 
 # 패턴
-PatternShape = Literal["+", "x"]
-class _PatternData(TypedDict):
-    input: PatternMatrix
-    expected: PatternShape
+
+PatternShape: TypeAlias = Literal["x", "+"]
+class \_PatternData(TypedDict):
+input: PatternMatrix
+expected: PatternShape
+
 ```
 <img width="527" height="132" alt="image" src="https://github.com/user-attachments/assets/cf0d653e-e57b-4b3d-8ff1-83e664a83c43" />
 
@@ -188,11 +193,13 @@ class _PatternData(TypedDict):
 ## 5. MAC 연산
 [MAC 연산 함수](../src/mac_cal/calculate/mac_calculate.py)
 ```
+
 for y, row in enumerate(pattern):
-  for x, value in enumerate(row):
-    score_a += filter_a[y][x] * value
-    score_b += filter_b[y][x] * value
-    operation_count += 1
+for x, value in enumerate(row):
+score*a += filter_a[y][x] * value
+score*b += filter_b[y][x] * value
+operation_count += 1
+
 ```
 위와 같이 이중 for 문으로 작성하여 각각의 y, x 위치를 인덱싱하여 찾은 후 패턴의 값과 필터의 값을 곱하는 방식을 사용했습니다
 
@@ -200,3 +207,4 @@ for y, row in enumerate(pattern):
 [점수 판정 함수](../src/util/validate/validate_score.py)
 - 제시된 권장 기준을 토대로 각각의 점수 차이가 1e-9 미만이면 False를 리턴합니다
 - 또한 테스트 결과 클래스인 [TestLog](../src/util/testing_function/test_log.py) 를 활용하여 계산에 걸린 평균 시간도 같이 리턴해주도록 구성했습니다.
+```
