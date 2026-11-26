@@ -275,4 +275,4 @@ operation_count += 1
 [점수 판정 함수](../src/util/validate/validate_score.py)
 - 제시된 권장 기준을 토대로 각각의 점수 차이가 1e-9 미만이면 False를 리턴합니다
 - 또한 테스트 결과 클래스인 [TestLog](../src/util/testing_function/test_log.py) 를 활용하여 계산에 걸린 평균 시간도 같이 리턴해주도록 구성했습니다.
-```
+
