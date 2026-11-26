@@ -82,6 +82,7 @@ def testable(func: Callable[P, R]) -> Callable[P, LazyTestTarget[R]]:
     return wrapper
 ```
 ```
+# 테스트 로그용 전환 클래스
 P = ParamSpec("P")
 R = TypeVar("R")
 
@@ -98,7 +99,8 @@ class LazyTestTarget(Generic[R]):
 
     def __call__(self) -> R:
         return self.func(*self.args, **self.kwargs)
-
+```
+```
 def testing_function(spec: TestSpec) -> TestLog:
     """테스트 함수
 
