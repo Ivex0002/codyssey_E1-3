@@ -1,42 +1,185 @@
 ## 1. 시뮬레이터 최적화
 [데이터 평탄화 분기 처리 + MAC 계산 함수](../src/mac_cal/calculate/mac_calculate.py)
 - 2차원 배열을 1차원 배열로 전환하여 연산하는 로직입니다
-- 기존 2차원 배열이 개발자 입장에서 치명적인 오류를 방지하고 가독성이 매우 좋기 때문에, 이를 그대로 두었습니다
-- 따라서 실제 연산시에는 2차원 > 1차원 으로 평탄화 작업을 넣어 이런 추가 작업을 가지고도 유의미한 연산 효율에 강점이 있는지를 보았습니다
+- 정확한 함수간의 연산 능력 비교를 위해 각각의 테스트 범위는 전처리 과정을 거친 데이터를 연산하는 함수 1개로 한정했습니다
+
+<details>
+<summary>연산 함수 분기 로직</summary>
+
+```
+def mac_calculate(
+    pattern_data: PatternInputData,
+    cal_mod: CalMod = "_2d",
+):
+
+    _validate_matrix_len(pattern_data)
+
+    match cal_mod:
+        case "_2d":
+            return _2d_cal(pattern_data)
+
+        case "_1d":
+            flat_patterns = _flatten_matrices(pattern_data)
+            return _1d_cal(flat_patterns)
+
+        case _:
+            raise ValueError(f"지원하지 않는 계산 모드: {cal_mod}")
+
+
+@testable
+def _1d_cal(flat_patterns: _FlatPatternData):
+    score_a = 0.0
+    score_b = 0.0
+
+    operation_count = 0
+
+    pattern, filter_a, filter_b = _get_flat(flat_patterns)
+    for idx, value in enumerate(pattern):
+        score_a += filter_a[idx] * value
+        score_b += filter_b[idx] * value
+        operation_count += 1
+
+    return score_a, score_b, operation_count
+
+
+@testable
+def _2d_cal(pattern_data: PatternInputData):
+    score_a = 0.0
+    score_b = 0.0
+
+    operation_count = 0
+
+    pattern, filter_a, filter_b = _get_filter_pattern(pattern_data)
+
+    for y, row in enumerate(pattern):
+        for x, value in enumerate(row):
+            score_a += filter_a[y][x] * value
+            score_b += filter_b[y][x] * value
+            operation_count += 1
+
+    return score_a, score_b, operation_count
+```
+
+</details>
+
+
+<details>
+<summary>@testable 유틸 함수</summary>
+
+```
+def testable(func: Callable[P, R]) -> Callable[P, LazyTestTarget[R]]:
+    """하나의 함수를 지연실행으로 변환"""
+
+    @wraps(func)
+    def wrapper(*args: P.args, **kwargs: P.kwargs) -> LazyTestTarget[R]:
+        return LazyTestTarget(func, args, kwargs)
+
+    return wrapper
+```
+```
+P = ParamSpec("P")
+R = TypeVar("R")
+
+class LazyTestTarget(Generic[R]):
+    def __init__(self, func: Callable[..., R], args: tuple, kwargs: dict):
+        self.func = func
+        self.args = args
+        self.kwargs = kwargs
+
+        # 함수명 자동 생성
+        args_str = [repr(a) for a in args]
+        kwargs_str = [f"{k}={repr(v)}" for k, v in kwargs.items()]
+        self.call_signature = f"{func.__name__}({', '.join(args_str + kwargs_str)})"
+
+    def __call__(self) -> R:
+        return self.func(*self.args, **self.kwargs)
+
+def testing_function(spec: TestSpec) -> TestLog:
+    """테스트 함수
+
+    ! 반드시 `TestSpec` 으로 인자 전달 필요(지연함수 자동 네이밍) !"""
+    start_time = _now()
+    tests: list[SingleTest] = []
+
+    for _ in range(spec.test_count):
+        s = _now()
+        spec.test_target()
+        e = _now()
+        tests.append(SingleTest(s, e))
+
+    end_time = _now()
+    return TestLog(start_time, end_time, spec.resolved_name, tests)
+
+def quick_test(
+    target: LazyTestTarget[R], test_count: int, name: str | None = None
+) -> TestLog:
+    """편의용 함수
+
+    TestSpec 자동 래핑"""
+    return testing_function(TestSpec(target, test_count, name))
+```
+
+- 위의 함수로 특정 함수 1개를 wrap 함으로써 `@testable` 데코레이션 호출 1회만으로 성능 데이터를 간편하게 받아 볼 수 있습니다
+- 필요 이상의 기능을 넣은 이유는 추후에 테스트 로그들을 장기 저장할 필요가 있을 경우에 대비하기 위해 각각의 테스트 명을 테스트 한 함수명과 인자를 같이 저장하여 테스트 로그 명으로 저장하기 위해서입니다
+
+```
+cal_result = mac_calculate(
+  user_input,
+  self.what_d,
+)
+
+try:
+  # 1회 실행 결과를 저장
+  score_a, score_b, _count = cal_result()
+  # 10회 연산 평균을 로그로 저장
+  result_log = quick_test(cal_result, test_count=10)
+  print_result(score_a, score_b, result_log)
+
+(중략)
+```
+- 당장은 위와 같이 단순하게 `quick_test` 함수에 target을 `TestSpec`으로 지연함수로 전처리 과정을 주어 결과값으로 [테스트 로그](../src/util/testing_function/test_log.py)를 넘겨줍니다
+- 테스트 로그에서는 전체 시간, 각각의 테스트 1회의 시간을 따로 살펴 볼 수 있습니다
+- 현재 코드는 10회의 테스트 평균을 내기 위해 각각의 단일 테스트들의 합계와 테스트 횟수를 기반으로 작성했습니다
+  
+</details>
 
 <details>
 <summary>결과 로그</summary>
 
 ```
-(중략)
 #---------------------------------------
 [3] 성능 분석 (평균/10회)
 데이터 평탄화 모드 : _2d
 #---------------------------------------
 크기           평균 시간(ms)       연산 횟수
 ----------------------------------
-size_5_1         0.009          25
-size_5_2         0.009          25
-size_13_1        0.032         169
-size_13_2        0.028         169
-size_25_1        0.092         625
-size_25_2        0.094         625
+size_5_1         0.008          25
+size_5_2         0.007          25
+size_5_3         0.007          25
+size_13_1        0.026         169
+size_13_2        0.023         169
+size_25_1        0.105         625
+size_25_2        0.097         625
+
 (중략)
+
 #---------------------------------------
 [3] 성능 분석 (평균/10회)
 데이터 평탄화 모드 : _1d
 #---------------------------------------
 크기           평균 시간(ms)       연산 횟수
 ----------------------------------
-size_5_1         0.011          25
-size_5_2         0.010          25
-size_13_1        0.041         169
-size_13_2        0.040         169
-size_25_1        0.126         625
-size_25_2        0.134         625
+size_5_1         0.007          25
+size_5_2         0.006          25
+size_5_3         0.004          25
+size_13_1        0.027         169
+size_13_2        0.023         169
+size_25_1        0.058         625
+size_25_2        0.057         625
 ```
 
-- 위의 결과를 토대로 연산 크기가 커질수록 해당 [평탄화 로직](https://github.com/Ivex0002/codyssey_E1-3/blob/1c009a689d28b36e8dd07671801e65ca8babbbbc/src/mac_cal/calculate/mac_calculate.py#L81)이 연산 시간에 유의미하게 악영향을 끼친다고 볼 수 있습니다
+- 위의 연산 결과를 토대로 1d로 평탄화를 거친 연산이 비교적 빠름을 확인 할 수 있습니다
+
 </details>
 
 ## 2. 패턴 생성기
