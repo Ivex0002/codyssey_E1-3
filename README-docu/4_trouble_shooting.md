@@ -6,7 +6,7 @@
 - 그러나 `src\util` 내부의 하위 파일에서는 `from util import choice, validate_pattern` 와 같은 재귀 호출이 불가능하고, 데이터 클래스 등 외부 참조가 필요할때(src/data_class/simple_pattern.py) 서로가 서로를 참조하는 순환 참조가 불가능하기 때문에 사용법에 주의가 필요했습니다.
 
 - 이런 참조 형식 문제는 본래 vscode 와 같은 에디터가 사전에 잡아줘야만 하는 컴파일 오류입니다.
-- type script 에서는 이런 임포팅 오류를 즉시 잡아주기 때문에 생긴 해프닝이었습니다.
+- type script 에서는 이런 임포팅 오류를 즉시 잡아주지만, python에서는 잡아주지 않기 때문에 생긴 해프닝이었습니다.
 - 이에 대한 문제를 해결하기 위해 오류가 발생한 지점을 모두 찾아 아래와 같이 절대 경로로 변경했습니다.
 ```
 - from util import pattern_generator, validate_pattern
