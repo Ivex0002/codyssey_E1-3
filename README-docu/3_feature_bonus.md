@@ -7,6 +7,8 @@
 <summary>연산 함수 분기 로직</summary>
 
 ```
+CalMod: TypeAlias = Literal["_1d", "_2d"]
+
 def mac_calculate(
     pattern_data: PatternInputData,
     cal_mod: CalMod = "_2d",
@@ -59,6 +61,9 @@ def _2d_cal(pattern_data: PatternInputData):
 
     return score_a, score_b, operation_count
 ```
+
+- 인자로 전달된 `CalMod` 에 따라 각각 다른 함수를 전달해주는 로직입니다
+- 각각의 함수 비교를 위해 2차원 배열을 1차원으로 평탄화 하는 작업은 테스트에서 제외했습니다
 
 </details>
 
