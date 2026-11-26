@@ -17,7 +17,7 @@ from data_class.pattern_enum import PatternInputData, PatternKey
 from util import testable, validate_pattern
 from typing import Literal, TypeAlias
 
-CalMod = Literal["_1d", "_2d"]
+CalMod: TypeAlias = Literal["_1d", "_2d"]
 
 
 _FlatData = list[float]

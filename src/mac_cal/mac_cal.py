@@ -7,7 +7,7 @@ from util import (
 )
 import json
 from .calculate.mac_calculate import mac_calculate, CalMod
-from .calculate.data_json_cal import data_json_cal
+from .calculate.data_json_cal import data_json_cal, DataJson
 from mac_cal.handle_user_input_pattern.user_inpt_pattern import user_inpt_pattern
 
 path = {
@@ -19,7 +19,7 @@ path = {
 class MacCal:
     def __init__(self):
         self.test_logs: list[TestLog] = []
-        self.data_json: dict | None = None
+        self.data_json: DataJson | None = None
         # 유저 입력 패턴이 장기저장 필요한가?
         # self.patterns: list[SimplePattern]
         self.what_d: CalMod = "_2d"

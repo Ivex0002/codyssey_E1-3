@@ -22,9 +22,21 @@ class _PatternData(TypedDict):
 
 _PatternCollection: TypeAlias = dict[str, _PatternData]
 
+
+# 패턴과 필터를 담은 데이터
+_MetaKey: TypeAlias = Literal["version", "type"]
+_MetaData: TypeAlias = dict[_MetaKey, str]
+
+
+class DataJson(TypedDict):
+    filters: _FilterCollection
+    patterns: _PatternCollection
+    meta: _MetaData
+
+
 # 데이터 정규화
 # filter:pattern
-PATTERN_MAP = {
+PATTERN_MAP: dict[_FilterShape, PatternShape] = {
     "cross": "+",
     "x": "x",
 }
@@ -38,7 +50,7 @@ class _TestLogSave(TypedDict):
     fail_rsn: str | None
 
 
-def data_json_cal(data: dict | None, what_d: CalMod):
+def data_json_cal(data: DataJson | None, what_d: CalMod):
     if not data:
         raise ValueError("data.json은 유효한 파일이 아닙니다")
 
