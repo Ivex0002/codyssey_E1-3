@@ -185,10 +185,12 @@ PATTERN_MAP: dict[_FilterShape, PatternShape] = {
 
 <img width="538" height="125" alt="스크린샷 2026-11-26 153205" src="https://github.com/user-attachments/assets/607de724-b4cb-412c-82ec-e53f85d80a25" />
 <img width="516" height="125" alt="image" src="https://github.com/user-attachments/assets/e8d35e0c-1f79-4eac-ab91-a0fb9e4c0055" />
+
 - `jud` 와 `pattern["expected"]` 이 같은 타입으로 잡힘을 확인 할 수 있습니다
 
-## 4-2. data json 파일을 기반으로 한 타입 생성
-- 이를 위해서 data.json 파일을 기반으로 collection 타입을 각각 따로 지정하여 작성했습니다. [해당 파일](../src/mac_cal/calculate/data_json_cal.py)
+## 4-2. data.json 파일을 기반으로 한 타입 생성
+- 단순히 data.json 파일의 구조만을 보고 매번 키값을 문자열로 뽑아오면 만약에 한글자라도 오타가 날 경우 바로 실행 오류가 나거나 비교불가 판정이 됩니다
+- 이를 해결하기 위해서 data.json 파일을 기반으로 collection 타입을 각각 따로 지정하여 작성했습니다. [해당 파일](../src/mac_cal/calculate/data_json_cal.py)
 - 이로 인해 각각 필터와 패턴의 타입이 vscode 상에서 명확하게 잡히므로 인자를 전달할 때 아래와 같이 특정 키를 검색하기 매우 쉬워지며, 이것들의 리턴값 또한 명확하게 잡히므로 비교 연산시에 버그를 사전에 방지할수 있는 이점이 있습니다
 ```
 
@@ -207,6 +209,7 @@ expected: PatternShape
 ```
 
 <img width="492" height="480" alt="스크린샷 2026-11-26 152116" src="https://github.com/user-attachments/assets/055c26e5-0901-4573-baec-615cf452d5a7" />
+
 - `patterns` 에서 뽑아낸 값인 `pattern` 에서 타입이 `(variable) pattern: _PatternData` 으로 잡힘을 확인 할 수 있습니다
 
 - 미션 요구지에는 Cross, X 만이 제시되어 있었으나, ux 관점에서 각각의 키값과 터미널 출력물이 일관되고 안정적인 데이터 제공을 위해 [필터 명, 패턴 명을 Enum을 활용](../src/mac_cal/handle_user_input_pattern/pattern_enum.py)하여 작성했습니다
