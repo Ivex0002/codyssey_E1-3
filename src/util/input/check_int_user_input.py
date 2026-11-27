@@ -11,4 +11,4 @@ def check_int_user_input(max_number: int, min_number: int = 1):
         if min_number <= int_value <= max_number:
             return int_value
 
-        print(f"❌ 1 ~ {max_number} 사이의 숫자로 입력해주세요.")
+        print(f"❌ {min_number} ~ {max_number} 사이의 숫자로 입력해주세요.")
